@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Моите финанси</title>
+  <link rel="stylesheet" href="style/main.css" />
+  <link rel="apple-touch-icon" href="icon.png" />
+</head>
+<body>
+  <div class="container">
+    <h1>💰 Моите финанси</h1>
+
+    <div class="tabs">
+      <button onclick="switchTab('monthly')">📆 Месечни разходи</button>
+      <button onclick="switchTab('flow')">🔄 Приходи и разходи</button>
+      <button onclick="switchTab('notes')">📝 Бележки</button>
+    </div>
+
+    <div id="tab-content">
+      <!-- МЕСЕЧНИ РАЗХОДИ -->
+      <div id="monthly" class="tab">
+        <div class="task-input">
+          <input type="text" id="monthlyText" placeholder="Сметка или плащане..." />
+          <input type="number" id="monthlyAmount" placeholder="Сума" />
+          <input type="date" id="monthlyDate" />
+          <button onclick="addMonthly()">Добави</button>
+        </div>
+        <div><strong>Общо:</strong> <span id="monthlyTotal">0.00</span> лв</div>
+        <ul id="monthlyList"></ul>
+      </div>
+
+      <!-- ПРИХОДИ И РАЗХОДИ -->
+      <div id="flow" class="tab hidden">
+        <div class="task-input">
+          <select id="flowType">
+            <option value="income">Приход</option>
+            <option value="expense">Разход</option>
+          </select>
+          <input type="text" id="flowText" placeholder="Описание..." />
+          <input type="number" id="flowAmount" placeholder="Сума" />
+          <input type="date" id="flowDate" />
+          <button onclick="addFlow()">Добави</button>
+        </div>
+        <div><strong>Баланс:</strong> <span id="flowBalance">0.00</span> лв</div>
+        <ul id="flowList"></ul>
+      </div>
+
+      <!-- БЕЛЕЖКИ -->
+      <div id="notes" class="tab hidden">
+        <div class="task-input">
+          <input type="text" id="noteInput" placeholder="Въведи бележка..." />
+          <button onclick="addNote()">Добави</button>
+        </div>
+        <div id="notesList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
