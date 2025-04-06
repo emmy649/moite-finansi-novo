@@ -17,8 +17,10 @@ function switchTab(tabId) {
     list.innerHTML = '';
   
     let total = 0;
-  
-      monthlyItems.forEach((item, index) => {
+
+     const sortedItems = [...monthlyItems].sort((a, b) => new Date(a.date) - new Date(b.date));
+     sortedItems.forEach((item, index) => {
+
     if (!item.paid) {
       total += parseFloat(item.amount);
     }
