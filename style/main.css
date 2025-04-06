@@ -173,7 +173,7 @@
   }
   
   /* Мобилен изглед */
- @media (max-width: 600px) {
+ @media (max-width: 500px) {
     .container {
       padding: 1.2rem;
       margin: 0 auto;
