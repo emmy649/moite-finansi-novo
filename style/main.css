@@ -197,35 +197,38 @@
       text-align: center;
     }
   
-    .task-input {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0.4rem;
-      margin-bottom: 1rem;
-    }
-    
-  
-    .task-input input,
-.task-input select,
-.task-input button {
-  font-size: 0.85rem;
-  padding: 0.3rem 0.5rem;
-  height: auto;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 6px;
-}
-
-  
-    .task-input button {
-      align-self: center;
-      width: fit-content;
-    }
-  
-    ul, #notesList {
-      padding-left: 0;
-    }
+     .task-input {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.3rem;
+    margin-bottom: 0.8rem;
   }
+
+  .task-input input,
+  .task-input select,
+  .task-input button {
+    font-size: 0.8rem !important;
+    padding: 0.25rem 0.4rem !important;
+    line-height: 1.2 !important;
+    height: auto !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    border-radius: 6px;
+  }
+
+  .task-input input[type="date"],
+  .task-input input[type="number"],
+  .task-input input[type="text"] {
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .task-input button {
+    align-self: center;
+    width: auto;
+    white-space: nowrap;
+  }
+}
   
   
   
