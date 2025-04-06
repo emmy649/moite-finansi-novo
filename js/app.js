@@ -18,8 +18,11 @@ function switchTab(tabId) {
   
     let total = 0;
   
-    monthlyItems.forEach((item, index) => {
+      monthlyItems.forEach((item, index) => {
+    if (!item.paid) {
       total += parseFloat(item.amount);
+    }
+
   
       const li = document.createElement('li');
       li.innerHTML = `
