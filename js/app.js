@@ -4,80 +4,103 @@ function switchTab(tabId) {
     document.getElementById(tabId).classList.remove('hidden');
   }
   
-  // === МЕСЕЧНИ РАЗХОДИ ===
-  const monthlyItems = JSON.parse(localStorage.getItem('monthlyItems')) || [];
-  
-  function saveMonthly() {
-    localStorage.setItem('monthlyItems', JSON.stringify(monthlyItems));
-  }
-  
-  function renderMonthly() {
-    const list = document.getElementById('monthlyList');
-    const totalSpan = document.getElementById('monthlyTotal');
-    list.innerHTML = '';
-  
-    let total = 0;
+  // === Форматиране на датата ===
+function formatDate(dateStr) {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('bg-BG', {
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit'
+  });
+}
 
-     const sortedItems = [...monthlyItems].sort((a, b) => new Date(a.date) - new Date(b.date));
-     sortedItems.forEach((item, index) => {
+// === МЕСЕЧНИ РАЗХОДИ ===
+const monthlyItems = JSON.parse(localStorage.getItem('monthlyItems')) || [];
 
+function saveMonthly() {
+  localStorage.setItem('monthlyItems', JSON.stringify(monthlyItems));
+}
+
+function renderMonthly() {
+  const list = document.getElementById('monthlyList');
+  const totalSpan = document.getElementById('monthlyTotal');
+  list.innerHTML = '';
+
+  let total = 0;
+
+  // Сортиране по дата
+  const sortedItems = [...monthlyItems].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  sortedItems.forEach((item) => {
     if (!item.paid) {
       total += parseFloat(item.amount);
     }
 
-  
-      const li = document.createElement('li');
-      li.innerHTML = `
-        <span>${item.text} – ${item.amount} лв – ${formatDate(item.date)}</span>
-        <div class="item-actions">
-          <input type="checkbox" ${item.paid ? 'checked' : ''} onchange="togglePaid(${index})" title="Отметни като платено" />
-          <button class="delete" onclick="deleteMonthly(${index})">X</button>
-        </div>
-      `;
-      li.classList.toggle('completed', item.paid);
-      list.appendChild(li);
-    });
-  
-    totalSpan.textContent = total.toFixed(2);
-  }
-  
-  function addMonthly() {
-    const text = document.getElementById('monthlyText').value.trim();
-    const amount = document.getElementById('monthlyAmount').value;
-    const date = document.getElementById('monthlyDate').value;
-  
-    if (text && amount && date) {
-      monthlyItems.push({ text, amount, date, paid: false });
-      saveMonthly();
-      renderMonthly();
-      document.getElementById('monthlyText').value = '';
-      document.getElementById('monthlyAmount').value = '';
-      document.getElementById('monthlyDate').value = '';
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <span>${item.text} – ${item.amount} лв – ${formatDate(item.date)}</span>
+      <div class="item-actions">
+        <input type="checkbox"
+          ${item.paid ? 'checked' : ''}
+          onchange="togglePaidByTextAndDate('${item.text}', '${item.date}', '${item.amount}')"
+          title="Отметни като платено"
+        />
+        <button class="delete" onclick="deleteMonthlyByTextAndDate('${item.text}', '${item.date}', '${item.amount}')">X</button>
+      </div>
+    `;
+    if (item.paid) {
+      li.classList.add('completed');
     }
+    list.appendChild(li);
+  });
+
+  totalSpan.textContent = total.toFixed(2);
+}
+
+function addMonthly() {
+  const text = document.getElementById('monthlyText').value.trim();
+  const amount = document.getElementById('monthlyAmount').value;
+  const date = document.getElementById('monthlyDate').value;
+
+  if (text && amount && date) {
+    monthlyItems.push({ text, amount, date, paid: false });
+    saveMonthly();
+    renderMonthly();
+
+    document.getElementById('monthlyText').value = '';
+    document.getElementById('monthlyAmount').value = '';
+    document.getElementById('monthlyDate').value = '';
   }
-  
-  function togglePaid(index) {
+}
+
+// === Отмятане чрез текст и дата ===
+function togglePaidByTextAndDate(text, date, amount) {
+  const index = monthlyItems.findIndex(
+    (item) => item.text === text && item.date === date && item.amount === amount
+  );
+
+  if (index !== -1) {
     monthlyItems[index].paid = !monthlyItems[index].paid;
     saveMonthly();
     renderMonthly();
   }
-  
-  function deleteMonthly(index) {
+}
+
+// === Изтриване по текст и дата ===
+function deleteMonthlyByTextAndDate(text, date, amount) {
+  const index = monthlyItems.findIndex(
+    (item) => item.text === text && item.date === date && item.amount === amount
+  );
+
+  if (index !== -1) {
     monthlyItems.splice(index, 1);
     saveMonthly();
     renderMonthly();
   }
-  
-  function formatDate(dateStr) {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('bg-BG', {
-      day: '2-digit',
-      month: '2-digit',
-      year: '2-digit'
-    });
-  }
-  
-  renderMonthly();
+}
+
+renderMonthly();
+
 
   // === ПРИХОДИ И РАЗХОДИ ===
 const flowItems = JSON.parse(localStorage.getItem('flowItems')) || [];
