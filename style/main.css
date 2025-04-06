@@ -172,80 +172,92 @@
     right: 10px;
   }
   
-  @media (max-width: 600px) {
-    .container {
-      padding: 1.2rem;
-      margin: 0 auto;
-    }
-  
-    .tabs {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      gap: 0.3rem;
-      margin-bottom: 1.5rem;
-    }
-  
-    .tabs button {
-      flex: 1 1 auto;
-      font-size: 0.8rem;
-      padding: 0.4rem 0.5rem;
-      border-radius: 6px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: center;
-    }
-  
-     .task-input {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.3rem;
-    margin-bottom: 0.8rem;
+@media (max-width: 600px) {
+  /* Контейнерът */
+  .container {
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 100%;
   }
 
-  .task-input input,
+  /* Табове – три на ред */
+  .tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.3rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .tabs button {
+    flex: 1;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.3rem;
+    border-radius: 6px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Входните форми */
+  .task-input {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .task-input input[type="text"],
+  .task-input input[type="number"],
+  .task-input input[type="date"],
   .task-input select,
   .task-input button {
     font-size: 0.8rem !important;
-    padding: 0.25rem 0.4rem !important;
-    line-height: 1.2 !important;
+    padding: 0.3rem 0.5rem !important;
+    line-height: 1.2;
     height: auto !important;
     width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
     box-sizing: border-box;
     border-radius: 6px;
-  }
-
-  .task-input input[type="date"],
-  .task-input input[type="number"],
-  .task-input input[type="text"] {
     appearance: none;
     -webkit-appearance: none;
   }
 
   .task-input button {
     align-self: center;
-    width: auto;
-    white-space: nowrap;
+    width: fit-content;
+    background-color: var(--primary, #4caf50);
+    color: white;
+    border: none;
+    cursor: pointer;
   }
-.task-input input,
-.task-input select {
-  max-width: 100%;
-  width: 100%;
-  min-width: 0;
-  height: auto;
+
+  /* Списъци */
+  ul,
+  #notesList {
+    padding-left: 0;
+  }
+
+  li {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
 }
 
-.task-input input[type="date"],
-.task-input input[type="number"],
-.task-input input[type="text"],
-.task-input select {
-  font-size: 0.8rem;
-  padding: 0.3rem 0.4rem;
-  border-radius: 6px;
-  appearance: none;
-  -webkit-appearance: none;
-}
 
   
   
