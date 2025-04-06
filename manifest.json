@@ -1,0 +1,15 @@
+{
+  "name": "Моите финанси",
+  "short_name": "Финанси",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fdfcf6",
+  "theme_color": "#aee3c0",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}
