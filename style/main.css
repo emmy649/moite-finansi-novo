@@ -315,4 +315,49 @@ li.completed {
   max-width: 100%;
   box-sizing: border-box;
 }
+/* Ограничаване само за таба Задължения */
+#debts {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Секции в Задължения */
+#debts .debt-section {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Формата вътре */
+#debts .task-input {
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Входните полета */
+#debts .task-input input,
+#debts .task-input button {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Контейнери със суми */
+#debts .totals {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#debts .total-box {
+  flex: 1 1 30%;
+  margin-bottom: 0.5rem;
+  box-sizing: border-box;
+}
 
