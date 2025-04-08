@@ -286,3 +286,33 @@ li.completed {
     font-size: 0.95rem;
   }
 }
+/* Ограничаване ширината на формите */
+.task-input {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Контейнерите за въвеждане вътре в .task-input */
+.task-input input,
+.task-input select,
+.task-input button {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Центриране и ограничение за секциите в "Задължения" */
+.debt-section {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* За общите кутии с тоталите */
+#debts .totals,
+.total-box {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
