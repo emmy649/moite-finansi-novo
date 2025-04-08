@@ -2,9 +2,8 @@
 <html lang="bg">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Моите финанси</title>
-  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style/main.css" />
   <link rel="apple-touch-icon" href="icon.png" />
 </head>
@@ -16,6 +15,7 @@
       <button onclick="switchTab('monthly')">📆 Месечни разходи</button>
       <button onclick="switchTab('flow')">🔄 Приходи и разходи</button>
       <button onclick="switchTab('notes')">📝 Бележки</button>
+      <button onclick="switchTab('debts')">📂 Задължения</button>
     </div>
 
     <div id="tab-content">
@@ -54,17 +54,40 @@
           <button onclick="addNote()">Добави</button>
         </div>
         <div id="notesList"></div>
+</div> <!-- това затваря таба "Бележки" -->
+
+<!-- ЗАДЪЛЖЕНИЯ -->
+<div id="debts" class="tab hidden">
+  <div class="totals">
+    <div class="total-box loan-box">
+     Дадени заеми: <strong><span id="loanTotal">0.00</span> лв</strong>
+    </div>
+
+    <div class="total-box debt-box">
+     Задължения: <strong><span id="debtTotal">0.00</span> лв</strong>
+    </div>
+  </div>
+
+  <div class="task-input">
+    <select id="debtType">
+      <option value="loan">Даден заем</option>
+      <option value="debt">Задължение</option>
+    </select>
+    <input type="text" id="debtDescription" placeholder="Описание..." />
+    <input type="number" id="debtAmount" placeholder="Сума" />
+    <button onclick="addEntry()">Добави</button>
+  </div>
+
+  
+  <ul id="loanList"></ul>
+  <ul id="debtList"></ul>
+</div>
+
       </div>
     </div>
   </div>
 
   <script src="js/app.js"></script>
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(() => console.log("✅ Service Worker registered"))
-      .catch(err => console.log("❌ SW error", err));
-  }
-</script>
 </body>
 </html>
+
