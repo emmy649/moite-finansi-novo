@@ -1,317 +1,176 @@
 /* === Цветова палитра === */
 :root {
-    --bg: #fdfaf6;            /* много светло бежово */
-    --surface: #ffffff;       /* фон на контейнери */
-    --primary: #b2e5d0;       /* бледо зелено */
-    --accent: #f6d8dc;        /* бледо розово */
-    --income: #a3d9a5;        /* зелено за приходи */
-    --expense: #f3aaaa;       /* червеникаво за разходи */
-    --text: #2e2e2e;          /* тъмен текст */
-    --muted: #888;
-    --border: #ddd;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-  }
-  
-  .container {
-    max-width: 700px;
-    margin: auto;
-    padding: 2rem;
-    background-color: var(--surface);
-    border-radius: 1rem;
-    box-shadow: 0 0 30px rgba(0,0,0,0.05);
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1.8rem;
-  }
-  
-  .tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-  }
-  
-  .tabs button {
-    background-color: var(--accent);
-    border: none;
-    color: var(--text);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-    min-width: 140px;
-  }
-  
-  .tabs button:hover {
-    background-color: var(--primary);
-  }
-  
-  .tab {
-    display: block;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  .task-input {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-bottom: 1rem;
-    justify-content: space-between;
-  }
-  
-  .task-input input,
-  .task-input select {
-    padding: 0.5rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-size: 1rem;
-    flex: 1 1 150px;
-    background-color: var(--bg);
-  }
-  
-  .task-input button {
-    background-color: var(--primary);
-    border: none;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex: 1 1 120px;
-  }
-  
-  .task-input button:hover {
-    background-color: var(--accent);
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  li {
-    background-color: #f9f9f9;
-    margin-bottom: 0.5rem;
-    padding: 0.8rem 1rem;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 0.2s;
-  }
-  
-  li.completed {
-    opacity: 0.6;
-    text-decoration: line-through;
-  }
-  
-  .income {
-    background-color: var(--income);
-  }
-  
-  .expense {
-    background-color: var(--expense);
-  }
-  
-  .delete {
-    background: none;
-    border: none;
-    color: var(--text);
-    font-weight: bold;
-    font-size: 1rem;
-    margin-left: 1rem;
-    cursor: pointer;
-    transition: color 0.3s ease;
-  }
-  
-  .delete:hover {
-    color: #000;
-  }
-  
-  .item-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  /* Бележки */
-  #notesList h3 {
-    margin-bottom: 0.3rem;
-    font-size: 1rem;
-    color: var(--muted);
-  }
-  
-  #notesList p {
-    background-color: #f1f1f1;
-    padding: 0.5rem 0.8rem;
-    border-radius: 6px;
-    margin: 0.3rem 0;
-    position: relative;
-  }
-  
-  #notesList p button {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-  }
-  
-  @media (max-width: 300px) {
-    .container {
-      padding: 1.2rem;
-      margin: 0 auto;
-    }
-  
-    .tabs {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-      border-radius: 6px;
-    }
-  
-    .tabs button {
-      flex: 1 1 auto;
-      font-size: 0.8rem;
-      padding:  0.6rem 1rem;
-      border-radius: 6px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: center;
-    }
-  
-    .task-input {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0.4rem;
-      margin-bottom: 1rem;
-    }
-    
-  
-    .task-input input,
-.task-input select,
-.task-input button {
-  font-size: 0.85rem;
-  padding: 0.3rem 0.5rem;
-  height: auto;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 6px;
+  --bg: #fdfaf6;
+  --surface: #ffffff;
+  --primary: #b2e5d0;
+  --accent: #f6d8dc;
+  --income: #a3d9a5;
+  --expense: #f3aaaa;
+  --text: #2e2e2e;
+  --muted: #888;
+  --border: #ddd;
 }
 
-  
-    .task-input button {
-      align-self: center;
-      width: fit-content;
-    }
-  
-    ul, #notesList {
-      padding-left: 0;
-    }
-  }
-
- /* --- Задължения --- */
-#debts h2 {
-  margin-top: 1.5rem;
-  font-size: 1.3rem;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-.debt-section {
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 2rem;
+  background-color: var(--surface);
+  border-radius: 1rem;
+  box-shadow: 0 0 30px rgba(0,0,0,0.05);
+}
+
+h1 {
+  text-align: center;
   margin-bottom: 2rem;
+  font-size: 1.8rem;
 }
 
-/* Контейнерите за елементите */
-#loanList li {
-  background-color: rgba(160, 255, 160, 0.08); /* бледо зелено */
+/* Tabs */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
-#debtList li {
-  background-color: rgba(255, 160, 160, 0.08); /* бледо червено */
+.tabs button {
+  background-color: var(--accent);
+  border: none;
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  min-width: 120px;
 }
 
-/* Добавени суми и текст */
-#loanList li span,
-#debtList li span {
-  flex: 1;
-  padding-left: 0.5rem;
+.tabs button:hover {
+  background-color: var(--primary);
 }
 
-/* Отметнати = задраскани */
-.completed {
-  text-decoration: line-through;
-  color: var(--muted);
-  opacity: 0.7;
+.tab {
+  display: block;
 }
 
-/* Списък */
-#loanList, #debtList {
+.hidden {
+  display: none;
+}
+
+/* Input секции */
+.task-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+}
+
+.task-input input,
+.task-input select {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+  flex: 1 1 150px;
+  background-color: var(--bg);
+}
+
+.task-input button {
+  background-color: var(--primary);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1 1 120px;
+}
+
+.task-input button:hover {
+  background-color: var(--accent);
+}
+
+/* Общи елементи */
+ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* Контейнер за обща сума */
-#debts p {
-  margin-bottom: 0.8rem;
-  font-weight: bold;
+li {
+  background-color: #f9f9f9;
+  margin-bottom: 0.5rem;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
 }
 
-/* Чекбокс и бутон в редица */
-#loanList li,
-#debtList li {
+li.completed {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.income { background-color: var(--income); }
+.expense { background-color: var(--expense); }
+
+.delete {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-weight: bold;
+  font-size: 1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.delete:hover {
+  color: #000;
+}
+
+.item-actions {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
 }
 
-/* --- Контейнери за обща сума --- */
-.row-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  width: 100%;
-  max-width: 100%;
-}
-#debts .totals {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+/* Бележки */
+#notesList h3 {
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+  color: var(--muted);
 }
 
-.total-box {
-  padding: 1rem 1.2rem;
-  border-radius: 10px;
-  font-weight: bold;
-  text-align: center;
-  width: 100px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+#notesList p {
+  background-color: #f1f1f1;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  margin: 0.3rem 0;
+  position: relative;
 }
 
+#notesList p button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
 
-/* --- Списък със смесени задължения --- */
+/* Задължения - Общи */
 #debtCombinedList li {
   margin-bottom: 0.6rem;
   padding: 0.7rem 1rem;
@@ -322,47 +181,78 @@
   font-size: 1rem;
 }
 
-/* Зелени редове */
 #debtCombinedList li.loan {
   background-color: rgba(120, 220, 160, 0.1);
 }
 
-/* Червени редове */
 #debtCombinedList li.debt {
   background-color: rgba(255, 150, 150, 0.1);
 }
 
-/* Чекбокс и изтриване */
-#debtCombinedList input[type="checkbox"] {
-  margin-right: 0.7rem;
+#debtCombinedList li.credit {
+  background-color: rgba(180, 200, 250, 0.1);
 }
 
-#debtCombinedList button.delete {
-  background-color: transparent;
-  color: #aaa;
-  border: none;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
+#debtCombinedList input[type="checkbox"] {
+  margin-right: 0.7rem;
 }
 
 #debtCombinedList button.delete:hover {
   color: #fff;
 }
 
-/* Задраскан текст */
-.completed {
-  text-decoration: line-through;
-  color: var(--muted);
-  opacity: 0.7;
+/* Контейнери за суми */
+#debts .totals {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
- 
+.total-box {
+  padding: 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
+  flex: 1 1 30%;
+  background-color: #ffffff;
+  color: var(--text);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
 
+/* Мобилна версия */
+@media (max-width: 300px) {
+  .tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
 
+  .tabs button {
+    flex: 1 1 45%;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
 
-  
-  
-  
+  .task-input {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-  
+  .task-input input,
+  .task-input select,
+  .task-input button {
+    font-size: 0.95rem;
+    padding: 0.5rem;
+    width: 100%;
+  }
+
+  #debts .totals {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .total-box {
+    width: 100%;
+  }
+}

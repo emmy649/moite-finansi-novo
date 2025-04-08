@@ -28,8 +28,9 @@ function renderMonthly() {
 
   let total = 0;
 
-  // Сортиране по дата
-  const sortedItems = [...monthlyItems].sort((a, b) => new Date(a.date) - new Date(b.date));
+  const sortedItems = [...monthlyItems].filter(item =>
+    item.text && item.amount && item.date
+  ).sort((a, b) => new Date(a.date) - new Date(b.date));
 
   sortedItems.forEach((item) => {
     if (!item.paid) {
@@ -56,6 +57,7 @@ function renderMonthly() {
 
   totalSpan.textContent = total.toFixed(2);
 }
+
 
 function addMonthly() {
   const text = document.getElementById('monthlyText').value.trim();
@@ -226,29 +228,38 @@ function addNote() {
 
 renderNotes();
 
- // === ЗАДЪЛЖЕНИЯ ===
 const loans = JSON.parse(localStorage.getItem('loans')) || [];
 const debts = JSON.parse(localStorage.getItem('debts')) || [];
+const credits = JSON.parse(localStorage.getItem('credits')) || [];
 
 function saveDebts() {
   localStorage.setItem('loans', JSON.stringify(loans));
   localStorage.setItem('debts', JSON.stringify(debts));
+  localStorage.setItem('credits', JSON.stringify(credits));
 }
 
 function renderDebts() {
-  const loanList = document.getElementById('loanList');
-  const debtList = document.getElementById('debtList');
+  const list = document.getElementById('debtCombinedList');
   const loanTotal = document.getElementById('loanTotal');
   const debtTotal = document.getElementById('debtTotal');
+  const creditTotal = document.getElementById('creditTotal');
 
-  loanList.innerHTML = '';
-  debtList.innerHTML = '';
+  list.innerHTML = '';
 
   let loanSum = 0;
   let debtSum = 0;
+  let creditSum = 0;
 
-  loans.forEach((item, index) => {
+  const allItems = [
+    ...loans.map(item => ({ ...item, type: 'loan' })),
+    ...debts.map(item => ({ ...item, type: 'debt' })),
+    ...credits.map(item => ({ ...item, type: 'credit' }))
+  ];
+
+  allItems.forEach((item, index) => {
     const li = document.createElement('li');
+    li.classList.add(item.type);
+
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = item.paid || false;
@@ -266,53 +277,30 @@ function renderDebts() {
     delBtn.textContent = 'X';
     delBtn.className = 'delete';
     delBtn.onclick = () => {
-      loans.splice(index, 1);
-      saveDebts();
-      renderDebts();
+      const arr = item.type === 'loan' ? loans : item.type === 'debt' ? debts : credits;
+      const i = arr.findIndex(el => el.description === item.description && el.amount === item.amount);
+      if (i !== -1) {
+        arr.splice(i, 1);
+        saveDebts();
+        renderDebts();
+      }
     };
 
     li.appendChild(checkbox);
     li.appendChild(span);
     li.appendChild(delBtn);
-    loanList.appendChild(li);
+    list.appendChild(li);
 
-    if (!item.paid) loanSum += parseFloat(item.amount);
-  });
-
-  debts.forEach((item, index) => {
-    const li = document.createElement('li');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.checked = item.paid || false;
-    checkbox.onchange = () => {
-      item.paid = checkbox.checked;
-      saveDebts();
-      renderDebts();
-    };
-
-    const span = document.createElement('span');
-    span.textContent = `${item.description} – ${item.amount} лв`;
-    if (item.paid) span.classList.add('completed');
-
-    const delBtn = document.createElement('button');
-    delBtn.textContent = 'X';
-    delBtn.className = 'delete';
-    delBtn.onclick = () => {
-      debts.splice(index, 1);
-      saveDebts();
-      renderDebts();
-    };
-
-    li.appendChild(checkbox);
-    li.appendChild(span);
-    li.appendChild(delBtn);
-    debtList.appendChild(li);
-
-    if (!item.paid) debtSum += parseFloat(item.amount);
+    if (!item.paid) {
+      if (item.type === 'loan') loanSum += parseFloat(item.amount);
+      if (item.type === 'debt') debtSum += parseFloat(item.amount);
+      if (item.type === 'credit') creditSum += parseFloat(item.amount);
+    }
   });
 
   loanTotal.textContent = loanSum.toFixed(2);
   debtTotal.textContent = debtSum.toFixed(2);
+  creditTotal.textContent = creditSum.toFixed(2);
 }
 
 function addEntry() {
@@ -321,13 +309,10 @@ function addEntry() {
   const amount = document.getElementById('debtAmount').value;
 
   if (description && amount) {
-    const entry = { description, amount, paid: false };
-
-    if (type === 'loan') {
-      loans.push(entry);
-    } else {
-      debts.push(entry);
-    }
+    const item = { description, amount, paid: false };
+    if (type === 'loan') loans.push(item);
+    else if (type === 'debt') debts.push(item);
+    else if (type === 'credit') credits.push(item);
 
     saveDebts();
     renderDebts();
@@ -339,6 +324,7 @@ function addEntry() {
 
 renderDebts();
 
+
  
 Object.keys(notes).forEach(date => {
   if (!Array.isArray(notes[date])) {
@@ -346,5 +332,3 @@ Object.keys(notes).forEach(date => {
   }
 });
 saveNotes();
-
-  

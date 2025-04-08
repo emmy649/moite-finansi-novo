@@ -59,25 +59,34 @@
 
 <!-- ЗАДЪЛЖЕНИЯ -->
 <div id="debts" class="tab hidden">
-  <div class="totals">
+  <div class="totals" style="display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem;">
     <div class="total-box loan-box">
-     Дадени заеми: <strong><span id="loanTotal">0.00</span> лв</strong>
-    </div>
-
-    <div class="total-box debt-box">
-     Задължения: <strong><span id="debtTotal">0.00</span> лв</strong>
-    </div>
-  </div>
+      <div class="totals" style="display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem;">
+        <div class="total-box loan-box">
+          Дадени заеми: <strong><span id="loanTotal">0.00</span> лв</strong>
+        </div>
+        <div class="total-box debt-box">
+          Задължения: <strong><span id="debtTotal">0.00</span> лв</strong>
+        </div>
+        <div class="total-box credit-box">
+          Кредити: <strong><span id="creditTotal">0.00</span> лв</strong>
+        </div>
+      </div>
+      
 
   <div class="task-input">
     <select id="debtType">
       <option value="loan">Даден заем</option>
       <option value="debt">Задължение</option>
-    </select>
+      <option value="credit">Кредит</option>
+    </select>    
     <input type="text" id="debtDescription" placeholder="Описание..." />
     <input type="number" id="debtAmount" placeholder="Сума" />
     <button onclick="addEntry()">Добави</button>
   </div>
+
+  <ul id="debtCombinedList"></ul>
+</div>
 
   
   <ul id="loanList"></ul>
@@ -98,5 +107,3 @@
   </script>
 </body>
 </html>
-
-
