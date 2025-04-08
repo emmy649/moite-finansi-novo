@@ -176,6 +176,9 @@ function renderNotes() {
     heading.textContent = date;
     section.appendChild(heading);
 
+    // ако не е масив, пропускаме
+    if (!Array.isArray(notes[date])) return;
+
     notes[date].forEach((text, index) => {
       const note = document.createElement('p');
       note.textContent = text;
@@ -197,6 +200,8 @@ function renderNotes() {
     notesList.appendChild(section);
   });
 }
+
+
 
 function addNote() {
   const noteInput = document.getElementById('noteInput');
@@ -220,5 +225,126 @@ function addNote() {
 }
 
 renderNotes();
+
+ // === ЗАДЪЛЖЕНИЯ ===
+const loans = JSON.parse(localStorage.getItem('loans')) || [];
+const debts = JSON.parse(localStorage.getItem('debts')) || [];
+
+function saveDebts() {
+  localStorage.setItem('loans', JSON.stringify(loans));
+  localStorage.setItem('debts', JSON.stringify(debts));
+}
+
+function renderDebts() {
+  const loanList = document.getElementById('loanList');
+  const debtList = document.getElementById('debtList');
+  const loanTotal = document.getElementById('loanTotal');
+  const debtTotal = document.getElementById('debtTotal');
+
+  loanList.innerHTML = '';
+  debtList.innerHTML = '';
+
+  let loanSum = 0;
+  let debtSum = 0;
+
+  loans.forEach((item, index) => {
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = item.paid || false;
+    checkbox.onchange = () => {
+      item.paid = checkbox.checked;
+      saveDebts();
+      renderDebts();
+    };
+
+    const span = document.createElement('span');
+    span.textContent = `${item.description} – ${item.amount} лв`;
+    if (item.paid) span.classList.add('completed');
+
+    const delBtn = document.createElement('button');
+    delBtn.textContent = 'X';
+    delBtn.className = 'delete';
+    delBtn.onclick = () => {
+      loans.splice(index, 1);
+      saveDebts();
+      renderDebts();
+    };
+
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    li.appendChild(delBtn);
+    loanList.appendChild(li);
+
+    if (!item.paid) loanSum += parseFloat(item.amount);
+  });
+
+  debts.forEach((item, index) => {
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = item.paid || false;
+    checkbox.onchange = () => {
+      item.paid = checkbox.checked;
+      saveDebts();
+      renderDebts();
+    };
+
+    const span = document.createElement('span');
+    span.textContent = `${item.description} – ${item.amount} лв`;
+    if (item.paid) span.classList.add('completed');
+
+    const delBtn = document.createElement('button');
+    delBtn.textContent = 'X';
+    delBtn.className = 'delete';
+    delBtn.onclick = () => {
+      debts.splice(index, 1);
+      saveDebts();
+      renderDebts();
+    };
+
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    li.appendChild(delBtn);
+    debtList.appendChild(li);
+
+    if (!item.paid) debtSum += parseFloat(item.amount);
+  });
+
+  loanTotal.textContent = loanSum.toFixed(2);
+  debtTotal.textContent = debtSum.toFixed(2);
+}
+
+function addEntry() {
+  const type = document.getElementById('debtType').value;
+  const description = document.getElementById('debtDescription').value.trim();
+  const amount = document.getElementById('debtAmount').value;
+
+  if (description && amount) {
+    const entry = { description, amount, paid: false };
+
+    if (type === 'loan') {
+      loans.push(entry);
+    } else {
+      debts.push(entry);
+    }
+
+    saveDebts();
+    renderDebts();
+
+    document.getElementById('debtDescription').value = '';
+    document.getElementById('debtAmount').value = '';
+  }
+}
+
+renderDebts();
+
+ 
+Object.keys(notes).forEach(date => {
+  if (!Array.isArray(notes[date])) {
+    delete notes[date];
+  }
+});
+saveNotes();
 
   
