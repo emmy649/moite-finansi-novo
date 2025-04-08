@@ -286,78 +286,76 @@ li.completed {
     font-size: 0.95rem;
   }
 }
-/* Ограничаване ширината на формите */
-.task-input {
-  max-width: 100%;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Контейнерите за въвеждане вътре в .task-input */
-.task-input input,
-.task-input select,
-.task-input button {
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-/* Центриране и ограничение за секциите в "Задължения" */
-.debt-section {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-/* За общите кутии с тоталите */
-#debts .totals,
-.total-box {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-/* Ограничаване само за таба Задължения */
+/* === Адаптивност за таб Задължения === */
 #debts {
-  max-width: 100%;
   width: 100%;
-  overflow-x: hidden;
   box-sizing: border-box;
+  padding: 0 1rem;
 }
 
-/* Секции в Задължения */
 #debts .debt-section {
   width: 100%;
   max-width: 100%;
-  margin: 0 auto;
   box-sizing: border-box;
 }
 
-/* Формата вътре */
 #debts .task-input {
+  display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
+  gap: 0.5rem;
+  justify-content: space-between;
 }
 
-/* Входните полета */
 #debts .task-input input,
 #debts .task-input button {
-  width: 100%;
+  flex: 1 1 48%;
+  min-width: 140px;
   max-width: 100%;
   box-sizing: border-box;
 }
 
-/* Контейнери със суми */
+#debts .task-input button {
+  flex: 1 1 100px;
+}
+
+/* Сумиращите кутии */
 #debts .totals {
+  display: flex;
   flex-wrap: wrap;
+  gap: 1rem;
   justify-content: space-between;
-  width: 100%;
+  margin-bottom: 1.5rem;
 }
 
 #debts .total-box {
   flex: 1 1 30%;
-  margin-bottom: 0.5rem;
+  padding: 1rem;
   box-sizing: border-box;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  font-weight: bold;
+  min-width: 100px;
+}
+@media (max-width: 500px) {
+  #debts .task-input {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #debts .task-input input,
+  #debts .task-input button {
+    width: 100%;
+  }
+
+  #debts .totals {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  #debts .total-box {
+    width: 100%;
+  }
 }
 
