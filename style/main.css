@@ -338,7 +338,7 @@ li.completed {
   font-weight: bold;
   min-width: 100px;
 }
-@media (max-width: 500px) {
+@media (max-width: 300px) {
   #debts .task-input {
     flex-direction: column;
     align-items: stretch;
