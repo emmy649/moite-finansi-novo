@@ -220,23 +220,38 @@ li.completed {
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Мобилна версия */
-@media (max-width: 300px) {
+@media (max-width: 400px) {
+  body {
+    padding: 0 0.5rem;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.2rem;
+    margin: 0 auto;
+  }
+
   .tabs {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0.4rem;
+    justify-content: center;
   }
 
   .tabs button {
     flex: 1 1 45%;
     font-size: 0.85rem;
     padding: 0.4rem 0.8rem;
+    text-align: center;
+    min-width: unset;
   }
 
   .task-input {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.5rem;
   }
 
   .task-input input,
@@ -245,14 +260,29 @@ li.completed {
     font-size: 0.95rem;
     padding: 0.5rem;
     width: 100%;
+    box-sizing: border-box;
+  }
+
+  .task-input button {
+    width: 100%;
+    text-align: center;
   }
 
   #debts .totals {
     flex-direction: column;
-    align-items: stretch;
+    gap: 0.8rem;
   }
 
   .total-box {
     width: 100%;
+  }
+
+  li {
+    font-size: 0.95rem;
+    padding: 0.7rem 1rem;
+  }
+
+  #notesList p {
+    font-size: 0.95rem;
   }
 }
